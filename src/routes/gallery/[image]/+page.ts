@@ -1,0 +1,9 @@
+import { error } from "@sveltejs/kit";
+import type { PageLoad } from "./$types";
+export const load: PageLoad = ({ params }) => {
+  return {
+    props: {
+      image: params.image,
+    },
+  };
+};

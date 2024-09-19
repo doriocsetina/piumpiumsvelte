@@ -1,0 +1,27 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+}
+
+.titolo {
+  grid-column: 1 / 4;
+  grid-row: 1 / 2;
+  text-align: center;
+  width: 100%;
+}
+
+#titolo-text {
+  letter-spacing: -2px;
+  font-weight: 900;
+}
+
+#titolo-gif {
+  width: 100%;
+}
+
+footer {
+  position: absolute;
+  bottom: 0%;
+  justify-content: space-between;
+  align-items: end; 
+}
