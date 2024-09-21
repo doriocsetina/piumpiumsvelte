@@ -9,7 +9,6 @@
   });
 </script>
 
-<p>in pratica è il sito web di piumpium</p>
 <div class="gallery">
   {#each images as image}
     <a href={`/gallery/${image}`}>
@@ -17,3 +16,10 @@
     </a>
   {/each}
 </div>
+
+<style>
+  .gallery-image {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
