@@ -1,8 +1,9 @@
 {
-    "title": "io sono un fiore",
-    "description": "una storia su come io sia di fatto un fiore",
+    "id": "3",
+    "title": "brakhage",
+    "description": "una sera al bread abbiamo visto 1 film di brakhage e questo e c'era questo frame senza senso",
+    "preview": "3/brakhage.png",
     "files": [
-        "01-1-iosonounfiore.png",
-        "01-2-iosonounfiore.png"
+        "3/brakhage.png"
     ]
 }

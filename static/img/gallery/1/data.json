@@ -1,8 +1,10 @@
 {
+    "id": "1",
     "title": "io sono un fiore",
     "description": "una storia su come io sia di fatto un fiore",
+    "preview": "1/1-iosonounfiore.png",
     "files": [
-        "01-1-iosonounfiore.png",
-        "01-2-iosonounfiore.png"
+        "1/1-iosonounfiore.png",
+        "1/2-iosonounfiore.png"
     ]
 }
