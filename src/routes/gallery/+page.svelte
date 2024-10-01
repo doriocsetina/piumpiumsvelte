@@ -1,9 +1,6 @@
 <div class="spiegone">
     <p>
-        il sito web di piumpium
-    </p>
-    <p>
-        ci sono le cose che disegno e le cose che scrivo
+        galleria che ancora non funziona
     </p>
 </div>
 
