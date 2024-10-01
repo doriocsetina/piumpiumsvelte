@@ -1,4 +1,18 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: large;
+  
+  background: #111;
+  /* Darker background to make colors pop */
+}
+
+#overlay {
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+  backdrop-filter: blur(1px) saturate(250%) contrast(150%);
 }

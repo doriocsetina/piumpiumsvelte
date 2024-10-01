@@ -18,8 +18,15 @@
 </div>
 
 <style>
+  .gallery {
+    justify-content: center;
+    padding: 20px;
+  }
   .gallery-image {
     max-width: 100%;
+    justify-content: center;
     height: auto;
+    image-rendering: pixelated;
+    margin-bottom: 20px;
   }
 </style>
