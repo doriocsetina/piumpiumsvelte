@@ -28,13 +28,13 @@
   let currentIndex = 0;
 
   function scrollToImage(index: number) {
-    const gallery = document.querySelector('.gallery-wrapper');
-    const images = document.querySelectorAll('.gallery-image');
+    const gallery = document.querySelector(".gallery-wrapper");
+    const images = document.querySelectorAll(".gallery-image");
     if (gallery && images[index]) {
       const image = images[index] as HTMLElement;
       gallery.scrollTo({
         left: image.offsetLeft - (gallery.clientWidth - image.clientWidth) / 2,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
       currentIndex = index;
     }
@@ -59,36 +59,89 @@
 
     <p class="description">{postData?.description}</p>
   </div>
-  <img
-    src={`/img/gallery/${postData?.preview}`}
-    alt={postData?.preview}
-    class="full-image"
-  />
+  <div class="gallery-container">
+    {#if postData && postData.files.length > 1}
+      {#if currentIndex > 0}
+        <button class="nav-button left" on:click={prevImage}>&lt;</button>
+      {/if}
+      <div class="gallery-wrapper">
+        {#each postData.files as postImage}
+          <img
+            src={`/img/gallery/${postImage}`}
+            alt={postImage}
+            class="gallery-image"
+            on:load={() => scrollToImage(currentIndex)}
+          />
+        {/each}
+      </div>
+      {#if currentIndex + 1 != postData.files.length}
+        <button class="nav-button right" on:click={nextImage}>&gt;</button>
+      {/if}
+    {:else if postData && postData.files.length == 1}
+      <img
+        src={`/img/gallery/${postData.preview}`}
+        alt="${postData.preview}"
+        class="gallery-image"
+      />
+    {/if}
+  </div>
 </div>
 
 <style>
   .container {
     display: flex;
     align-items: center; /* Center items vertically */
-    justify-content: space-between; /* Space out items horizontally */
-    height: 100vh; /* Full viewport height */
-    padding: 0 2vw; /* Add some padding to the sides */
+    justify-content: space-evenly; /* Space out items horizontally */
+  }
+  .title,
+  .description {
+    margin: 0; /* Remove default margin */
+    background-color: white; /* Set background color to white */
+    font-size: large;
   }
   .text-content {
     display: flex;
     flex-direction: column;
     justify-content: center; /* Center text vertically */
-    padding: 1rem; /* Add some padding around the text */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for better visibility */
   }
-  .full-image {
-    max-width: 90vw; /* Adjust width as needed */
-    max-height: 90vh; /* Maintain aspect ratio */
-    object-fit: contain; /* Maintain aspect ratio and fit within the container */
+
+  .gallery-container {
+    max-width: 100vh; /* Adjust height as needed */
+    max-height: 98vh; /* Full width */
+
+    overflow: hidden; /* No scrollbars for the outer container */
+    position: relative; /* Positioning control */
   }
-  .title, .description {
-    margin: 0; /* Remove default margin */
-    background-color: white; /* Set background color to white */
-    font-size: large;
+
+  .gallery-wrapper {
+    display: flex; /* Make it a flex container */
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Snap scrolling */
+    scroll-behavior: smooth; /* Smooth scrolling */
+    height: 100%; /* Full height of the container */
+    -webkit-overflow-scrolling: touch;
+  }
+  .gallery-image {
+    flex: 0 0 auto; /* Prevent images from shrinking or growing */
+    width: 100%; /* Each image takes full width */
+    height: 100%; /* Full height */
+    scroll-snap-align: start; /* Snap points */
+  }
+
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    z-index: 1;
+  }
+  .nav-button.left {
+    left: 0;
+  }
+  .nav-button.right {
+    right: 0;
   }
 </style>

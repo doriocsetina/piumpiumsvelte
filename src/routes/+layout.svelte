@@ -9,7 +9,8 @@
     <a href="/">home</a>
     <a href="/about">about</a>
     <a href="/gallery">gallery</a>
-    <a href="/written-things">written things</a>
+    <a href="/written-things">written</a>
+    <a href="/tattoo-placer">tattoos</a>
   </nav>
 </div>
 
@@ -38,7 +39,8 @@
     font-size: xx-large;
     background-color: white;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow items to wrap */
   }
 
   nav a, footer a {
@@ -49,11 +51,13 @@
   footer {
     position: fixed;
     bottom: 0;
-    left: 10%;
-    width: 35%;
     background-color: white;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+  }
+  
+  footer a {
+    margin-right: 10px;
   }
 
 </style>
