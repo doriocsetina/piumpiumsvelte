@@ -43,7 +43,7 @@
     {#each postsData as post}
       <a href={`/gallery/${post.id}`} on:blur={hidePreview}>
         <img
-          src={`app/gallery/${post.preview}`}
+          src={`/app/gallery/${post.preview}`}
           alt={post.title}
           class="gallery-image"
           on:mouseover={() => showPreview(post.title)}

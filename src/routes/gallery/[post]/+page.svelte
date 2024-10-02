@@ -10,7 +10,6 @@
     preview: string;
     files: string[];
   }
-  const baseUrl: string = window.location.origin;
   let postData: PostData;
   
   onMount(async () => {
@@ -68,7 +67,7 @@
       <div class="gallery-wrapper">
         {#each postData.files as postImage}
           <img
-            src={`${baseUrl}/gallery/${postImage}`}
+            src={`/app/gallery/${postImage}`}
             alt={postImage}
             class="gallery-image"
             on:load={() => scrollToImage(currentIndex)}
@@ -80,7 +79,7 @@
       {/if}
     {:else if postData && postData.files.length == 1}
       <img
-        src={`${baseUrl}/gallery/${postData.preview}`}
+        src={`/app/gallery/${postData.preview}`}
         alt="${postData.preview}"
         class="gallery-image"
       />
