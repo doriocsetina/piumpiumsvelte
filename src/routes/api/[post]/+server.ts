@@ -4,7 +4,7 @@ import { json } from '@sveltejs/kit';
 
   export async function GET({ params }) {
     const { post } = params;
-    const galleryDir: string = 'static/img/gallery'
+    const galleryDir: string = 'build/client/gallery'
     const jsonFilePath: string = join(galleryDir, post, 'data.json');
     console.log("i did a thing");
     const data = JSON.parse(readFileSync(jsonFilePath, 'utf-8'))
