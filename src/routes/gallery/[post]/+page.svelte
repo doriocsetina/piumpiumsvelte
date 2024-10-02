@@ -67,7 +67,7 @@
       <div class="gallery-wrapper">
         {#each postData.files as postImage}
           <img
-            src={`/gallery/${postImage}`}
+            src={`gallery/${postImage}`}
             alt={postImage}
             class="gallery-image"
             on:load={() => scrollToImage(currentIndex)}
