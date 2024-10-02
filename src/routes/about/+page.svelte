@@ -22,6 +22,10 @@
     align-items: center; /* Center vertically */
     height: 100vh; /* Full viewport height */
     margin: 0; /* Remove default margin */
+    background-image: url('/img/background/about.PNG');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
   }
   .spiegone {
     display: flex;
