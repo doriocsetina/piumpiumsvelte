@@ -8,10 +8,9 @@
     files: string[];
   }
   let postsData: PostData[] = [];
-  const baseUrl: string = '';
+  const baseUrl: string = window.location.origin;
 
   onMount(async () => {
-    const baseUrl: string = window.location.origin;
     console.log("this is the thing: ", baseUrl);
     try {
       const response = await fetch("/api/images");

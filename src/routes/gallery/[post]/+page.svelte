@@ -10,11 +10,10 @@
     preview: string;
     files: string[];
   }
-  const baseUrl: string = '';
+  const baseUrl: string = window.location.origin;
   let postData: PostData;
   
   onMount(async () => {
-    const baseUrl: string = window.location.origin;
     try {
       const response = await fetch("/api/" + data.post);
       if (response.ok) {
