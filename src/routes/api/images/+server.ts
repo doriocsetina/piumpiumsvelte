@@ -11,7 +11,7 @@ interface PostData {
 }
 
 export async function GET() {
-  const galleryDir: string = 'gallery';
+  const galleryDir: string = 'static/img/gallery';
   const folders: string[] = readdirSync(galleryDir);
 
   const posts: PostData[] = folders.map((folder: string) => {
