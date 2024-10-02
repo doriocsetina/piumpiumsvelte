@@ -23,8 +23,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@picocss/pico": "^2.0.6",
-		"picomatch": "^4.0.2",
 		"three": "^0.169.0"
 	}
 }
