@@ -67,7 +67,7 @@
       <div class="gallery-wrapper">
         {#each postData.files as postImage}
           <img
-            src={`img/gallery/${postImage}`}
+            src={`/img/gallery/${postImage}`}
             alt={postImage}
             class="gallery-image"
             on:load={() => scrollToImage(currentIndex)}
@@ -79,7 +79,7 @@
       {/if}
     {:else if postData && postData.files.length == 1}
       <img
-        src={`img/gallery/${postData.preview}`}
+        src={`/img/gallery/${postData.preview}`}
         alt="${postData.preview}"
         class="gallery-image"
       />
