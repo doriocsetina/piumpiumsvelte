@@ -8,8 +8,10 @@
     files: string[];
   }
   let postsData: PostData[] = [];
+  const baseUrl: string = '';
 
   onMount(async () => {
+    const baseUrl: string = window.location.origin;
     try {
       const response = await fetch("/api/images");
       if (response.ok) {
@@ -41,9 +43,9 @@
   </div>
   <div class="gallery">
     {#each postsData as post}
-      <a href={`./gallery/${post.id}`} on:blur={hidePreview}>
+      <a href={`/gallery/${post.id}`} on:blur={hidePreview}>
         <img
-          src={`./gallery/${post.preview}`}
+          src={`${baseUrl}/gallery/${post.preview}`}
           alt={post.title}
           class="gallery-image"
           on:mouseover={() => showPreview(post.title)}

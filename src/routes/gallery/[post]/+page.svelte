@@ -10,9 +10,11 @@
     preview: string;
     files: string[];
   }
+  const baseUrl: string = '';
   let postData: PostData;
-
+  
   onMount(async () => {
+    const baseUrl: string = window.location.origin;
     try {
       const response = await fetch("/api/" + data.post);
       if (response.ok) {
@@ -67,7 +69,7 @@
       <div class="gallery-wrapper">
         {#each postData.files as postImage}
           <img
-            src={`./gallery/${postImage}`}
+            src={`${baseUrl}/gallery/${postImage}`}
             alt={postImage}
             class="gallery-image"
             on:load={() => scrollToImage(currentIndex)}
@@ -79,7 +81,7 @@
       {/if}
     {:else if postData && postData.files.length == 1}
       <img
-        src={`./gallery/${postData.preview}`}
+        src={`${baseUrl}/gallery/${postData.preview}`}
         alt="${postData.preview}"
         class="gallery-image"
       />
