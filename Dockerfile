@@ -1,24 +1,20 @@
-# Stage 1: Build the Svelte app
-FROM node:16 AS build
+FROM node:20-alpine3.19 AS base
 
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+COPY . /app
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+FROM base AS prod-deps
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 
-COPY . .
-RUN npm run build
+FROM base AS build
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN pnpm run check
+RUN pnpm run build
 
-# Debugging step: List the contents of the build directory
-RUN ls -la /app/build
-
-# Stage 2: Serve the built app
-FROM node:16-alpine
-
-WORKDIR /app
-
-COPY --from=build /app/build ./build
-
+FROM base
+COPY --from=prod-deps /app/node_modules /app/node_modules
+COPY --from=build /app/build /app/build
 EXPOSE 3000
-
-CMD ["node", "build"]
