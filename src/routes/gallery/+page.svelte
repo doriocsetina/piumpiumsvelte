@@ -12,6 +12,7 @@
 
   onMount(async () => {
     const baseUrl: string = window.location.origin;
+    console.log("this is the thing: ", baseUrl);
     try {
       const response = await fetch("/api/images");
       if (response.ok) {
@@ -45,7 +46,7 @@
     {#each postsData as post}
       <a href={`/gallery/${post.id}`} on:blur={hidePreview}>
         <img
-          src={`${baseUrl}/salkfdgjlkasdfjgflkds/${post.preview}`}
+          src={`${baseUrl}/gallery/${post.preview}`}
           alt={post.title}
           class="gallery-image"
           on:mouseover={() => showPreview(post.title)}
