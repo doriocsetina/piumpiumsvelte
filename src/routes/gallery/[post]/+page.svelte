@@ -67,7 +67,7 @@
       <div class="gallery-wrapper">
         {#each postData.files as postImage}
           <img
-            src={`/img/gallery/${postImage}`}
+            src={`/gallery/${postImage}`}
             alt={postImage}
             class="gallery-image"
             on:load={() => scrollToImage(currentIndex)}
@@ -79,7 +79,7 @@
       {/if}
     {:else if postData && postData.files.length == 1}
       <img
-        src={`/img/gallery/${postData.preview}`}
+        src={`/gallery/${postData.preview}`}
         alt="${postData.preview}"
         class="gallery-image"
       />
@@ -126,6 +126,7 @@
     width: 100%; /* Each image takes full width */
     height: 100%; /* Full height */
     scroll-snap-align: start; /* Snap points */
+    z-index: 50;
   }
 
   .nav-button {
@@ -140,8 +141,10 @@
   }
   .nav-button.left {
     left: 0;
+    z-index: 51;
   }
   .nav-button.right {
     right: 0;
+    z-index: 51;
   }
 </style>

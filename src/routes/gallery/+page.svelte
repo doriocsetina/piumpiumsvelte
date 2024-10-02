@@ -43,7 +43,7 @@
     {#each postsData as post}
       <a href={`/gallery/${post.id}`} on:blur={hidePreview}>
         <img
-          src={`/img/gallery/${post.preview}`}
+          src={`/gallery/${post.preview}`}
           alt={post.title}
           class="gallery-image"
           on:mouseover={() => showPreview(post.title)}
@@ -72,7 +72,7 @@
     transform: translateY(-50%);
     background-color: white;
     padding: 10px;
-    z-index: 1000;
+    z-index: 10;
   }
   
   .gallery {

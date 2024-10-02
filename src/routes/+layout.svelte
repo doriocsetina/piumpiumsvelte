@@ -2,7 +2,7 @@
 
 <div class="homebar">
   <a href="/">
-    <img id="homebar-image" src="/img/titolone.gif" alt="Home"/>
+    <img id="homebar-image" src="/img/titolone.gif" alt="Home" />
   </a>
 
   <nav class="main_nav">
@@ -28,6 +28,15 @@
 <style>
   .homebar {
     position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .homebar {
+      position: static;
+    }
+
   }
   #homebar-image {
     width: 50%;
@@ -43,7 +52,8 @@
     flex-wrap: wrap; /* Allow items to wrap */
   }
 
-  nav a, footer a {
+  nav a,
+  footer a {
     color: black;
     text-decoration: none;
   }
@@ -55,9 +65,8 @@
     display: flex;
     justify-content: space-between;
   }
-  
+
   footer a {
     margin-right: 10px;
   }
-
 </style>
