@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  
   interface PostData {
     id: string;
     title: string;
@@ -8,7 +9,7 @@
     files: string[];
   }
   let postsData: PostData[] = [];
-  
+
   onMount(async () => {
     try {
       const response = await fetch("/api/images");
@@ -22,14 +23,14 @@
     }
   });
 
-  let previewTitle: string = '';
+  let previewTitle: string = "";
 
   function showPreview(title: string) {
     previewTitle = title;
   }
 
   function hidePreview() {
-    previewTitle = '';
+    previewTitle = "";
   }
 </script>
 
@@ -56,12 +57,26 @@
   </div>
 </div>
 
+<div class="background"></div>
+
 <style>
+  .background {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: url("/img/background/gallery.png");
+
+    background-position: left;
+    background-repeat: no-repeat;
+  }
   .container {
     display: flex;
     flex-direction: column;
     overflow: auto;
-    align-items:end;
+    align-items: end;
     margin-right: 10%;
   }
 
@@ -74,19 +89,19 @@
     padding: 10px;
     z-index: 10;
   }
-  
+
   .gallery {
     display: flex;
     flex-direction: column; /* Arrange images in a column */
     max-width: 90vh;
   }
-  
+
   .gallery-image {
     max-width: 100%; /* Make images responsive */
     height: auto; /* Maintain aspect ratio */
     margin-bottom: 10px; /* Add some space between images */
   }
-  
+
   .gallery a:last-child .gallery-image {
     margin-bottom: 0; /* Remove margin from the last image */
   }

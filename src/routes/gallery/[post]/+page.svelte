@@ -14,7 +14,7 @@
   
   onMount(async () => {
     try {
-      const response = await fetch("/api/" + data.post);
+      const response = await fetch("/api/images/" + data.post);
       if (response.ok) {
         postData = (await response.json()) as PostData;
       } else {
@@ -91,7 +91,8 @@
   .container {
     display: flex;
     align-items: center; /* Center items vertically */
-    justify-content: space-evenly; /* Space out items horizontally */
+    justify-content: space-between; /* Space out items horizontally */
+    margin-right: 10%;
   }
   .title,
   .description {
@@ -111,6 +112,7 @@
 
     overflow: hidden; /* No scrollbars for the outer container */
     position: relative; /* Positioning control */
+    z-index: 20;
   }
 
   .gallery-wrapper {
@@ -126,7 +128,6 @@
     width: 100%; /* Each image takes full width */
     height: 100%; /* Full height */
     scroll-snap-align: start; /* Snap points */
-    z-index: 50;
   }
 
   .nav-button {

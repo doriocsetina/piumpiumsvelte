@@ -1,6 +1,39 @@
+<script lang="ts">
+  import { onMount } from "svelte";
+
+  interface TextData {
+    id: string;
+    title: string;
+    description: string;
+    has_chapters: boolean;
+    chapters: string[];
+  }
+
+  let textsData: TextData[] = [];
+
+  onMount(async () => {
+    try {
+      const response = await fetch("/api/texts");
+      if (response.ok) {
+        textsData = await response.json();
+      } else {
+        console.error("Failed to fetch texts data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching texts data:", error);
+    }
+  });
+</script>
+
 <div class="container">
   <div class="spiegone">
-    <p>qui ci sono le cose scritte</p>
+    <p>tutte le mie quasi zine - da maneggiare con cura</p>
+
+    {#each textsData as text}
+      <a href={`/written-things/${text.id}`}>
+        <h1>{text.title}<br /></h1>
+      </a>
+    {/each}
   </div>
 </div>
 
@@ -18,8 +51,12 @@
   }
   .spiegone {
     display: flex;
-    align-items: center;
+    align-items: start;
+    flex-direction: column;
     position: relative;
+  }
+  .spiegone h1 {
+    background-color: white;
   }
 
   .spiegone p {

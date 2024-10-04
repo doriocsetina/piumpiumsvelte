@@ -23,6 +23,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"marked": "^14.1.2",
 		"three": "^0.169.0"
 	}
 }

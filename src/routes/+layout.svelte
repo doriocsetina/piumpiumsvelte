@@ -26,6 +26,17 @@
 <div id="overlay"></div>
 
 <style>
+
+  #overlay {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    backdrop-filter: blur(1px) saturate(250%) contrast(150%);
+  }
   .homebar {
     position: fixed;
     top: 0;
@@ -36,7 +47,6 @@
     .homebar {
       position: static;
     }
-
   }
   #homebar-image {
     width: 50%;
