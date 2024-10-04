@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  
+  import { onDestroy } from "svelte";
+  import { y } from '$lib/stores';
+
   interface PostData {
     id: string;
     title: string;
@@ -10,7 +12,11 @@
   }
   let postsData: PostData[] = [];
 
+  onDestroy(() => ($y = window.scrollY))
+
   onMount(async () => {
+    console.log("praticamente la y è:", $y)
+    window.scrollTo(0, $y);
     try {
       const response = await fetch("/api/images");
       if (response.ok) {
@@ -72,6 +78,7 @@
     background-position: left;
     background-repeat: no-repeat;
   }
+
   .container {
     display: flex;
     flex-direction: column;

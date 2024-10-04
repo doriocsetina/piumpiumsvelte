@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
+  import { isTitleShown } from "$lib/stores";
   export let data: PageData;
 
   interface PostData {
@@ -13,6 +14,7 @@
   let postData: PostData;
   
   onMount(async () => {
+    $isTitleShown = false;
     try {
       const response = await fetch("/api/images/" + data.post);
       if (response.ok) {
@@ -24,7 +26,7 @@
       console.error("Error fetching posts data:", error);
     }
   });
-
+  onDestroy( () => $isTitleShown = true)
   let currentIndex = 0;
 
   function scrollToImage(index: number) {

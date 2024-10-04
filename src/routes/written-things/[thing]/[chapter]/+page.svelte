@@ -22,9 +22,7 @@
       const response = await fetch("/api/texts/" + data.thing);
       if (response.ok) {
         textData = (await response.json()) as TextData;
-        const markdownResponse = await fetch(
-          `/written/${textData.id}/${textData.chapters[0]}`
-        );
+        const markdownResponse = await fetch(`/written/${textData.id}/${textData.chapters[data.chapter as unknown as number]}`);
         if (markdownResponse.ok) {
           const markdown = await markdownResponse.text();
           markdownContent = Promise.resolve(marked(markdown));
@@ -40,13 +38,17 @@
 
 <div class="container">
   <div class="capitolo">
-      <h1>{textData?.title}</h1>
-      {#await markdownContent}
-        <div class="markdown-content"></div>
-      {:then resolvedMarkdownContent}
-        <div class="markdown-content">{@html resolvedMarkdownContent}</div>
-      {/await}
+    <h1>{textData?.title}</h1>
+    {#await markdownContent}
+      <div class="markdown-content"></div>
+    {:then resolvedMarkdownContent}
+      <div class="markdown-content">{@html resolvedMarkdownContent}</div>
+    {/await}
   </div>
+  <nav>
+    <a href="/written-things/{textData.id}/{(data.chapter as unknown as number) + 1}">capitolo successivo</a>
+    <a href="/written-things/{textData.id}/{(data.chapter as unknown as number) - 1}">capitolo precedente</a>
+  </nav>
 </div>
 <div class="background"></div>
 

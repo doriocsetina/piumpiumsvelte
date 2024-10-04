@@ -3,15 +3,27 @@
     <p>benvenut sul sito web di pium pium !</p>
   </div>
 </div>
+<div class="background"></div>
 
 <style>
+  .background {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: url("/img/background/home.PNG");
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+  }
   .container {
     display: flex;
     justify-content: flex-start; /* Align to the left */
     align-items: center; /* Center vertically */
-    height: 100vh; /* Full viewport height */
     margin: 0; /* Remove default margin */
-    background-image: url('/img/background/home.PNG');
+    background-image: url("/img/background/home.PNG");
     background-size: contain;
     background-position: right;
     background-repeat: no-repeat;
@@ -21,7 +33,7 @@
     align-items: center;
     position: relative;
   }
-  
+
   .spiegone p {
     align-items: center;
     background-color: white;

@@ -1,11 +1,48 @@
+<script lang="ts">
+  import { onMount } from "svelte";
+  import { isTitleShown } from "$lib/stores";
+
+  let isScrolled: Boolean = false;
+
+  onMount(() => {
+    const homebarImage = document.querySelector(".homebar-image");
+    $isTitleShown = true;
+    if (!homebarImage) {
+      console.error("mainNav or homebarImage not found");
+      return;
+    }
+
+    const handleScroll = () => {
+      const homebarImageBottom =
+        homebarImage.getBoundingClientRect().bottom + window.scrollY;
+        console.log()
+      if (window.scrollY > homebarImageBottom) {
+        isScrolled = true;
+      } else {
+        isScrolled = false;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+</script>
+
 <link rel="stylesheet" href="/css/global.css" />
 
 <div class="homebar">
   <a href="/">
-    <img id="homebar-image" src="/img/titolone.gif" alt="Home" />
+    <img
+      class="homebar-image {$isTitleShown ? '' : 'hidden'}"
+      src="/img/titolone.gif"
+      alt="Home"
+    />
   </a>
 
-  <nav class="main_nav">
+  <nav class="main_nav {isScrolled ? 'scrolled' : ''}">
     <a href="/">home</a>
     <a href="/about">about</a>
     <a href="/gallery">gallery</a>
@@ -26,7 +63,6 @@
 <div id="overlay"></div>
 
 <style>
-
   #overlay {
     position: fixed;
     z-index: 10;
@@ -37,29 +73,46 @@
     pointer-events: none;
     backdrop-filter: blur(1px) saturate(250%) contrast(150%);
   }
+
   .homebar {
-    position: fixed;
     top: 0;
     width: 100%;
+    transition: all 0.3s ease;
   }
 
-  @media (max-width: 768px) {
-    .homebar {
-      position: static;
-    }
-  }
-  #homebar-image {
+  .homebar-image {
     width: 50%;
     height: auto;
   }
+  .homebar-image.hidden {
+    width: 50%;
+    height: auto;
+    display: none;
+  }
+
   .main_nav {
-    left: 0;
-    width: 35%;
-    font-size: xx-large;
-    background-color: white;
+    left: 5px;
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
     flex-wrap: wrap; /* Allow items to wrap */
+    width: 600px;
+    height: 40px;
+    font-size: xx-large;
+    background-color: white;
+    transition: all 0.5s ease;
+  }
+
+  .main_nav.scrolled {
+    position: fixed;
+    top: 0;
+    left: 5px;
+  }
+
+  @media (max-width: 768px) {
+    .main_nav.scrolled {
+      position: static;
+    }
   }
 
   nav a,
@@ -69,14 +122,9 @@
   }
 
   footer {
-    position: fixed;
+    width: 400px;
     bottom: 0;
     background-color: white;
-    display: flex;
-    justify-content: space-between;
   }
 
-  footer a {
-    margin-right: 10px;
-  }
 </style>

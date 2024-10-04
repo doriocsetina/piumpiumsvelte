@@ -30,24 +30,38 @@
     <p>tutte le mie quasi zine - da maneggiare con cura</p>
 
     {#each textsData as text}
+      {#if text.has_chapters}
+      <a href={`/written-things/${text.id}/0`}>
+        <h1>{text.title}<br /></h1>
+      </a>
+      {:else}
       <a href={`/written-things/${text.id}`}>
         <h1>{text.title}<br /></h1>
       </a>
+      {/if}
     {/each}
   </div>
 </div>
 
+<div class="background"></div>
+
 <style>
-  .container {
-    display: flex;
-    justify-content: flex-start; /* Align to the left */
-    align-items: center; /* Center vertically */
-    height: 100vh; /* Full viewport height */
-    margin: 0; /* Remove default margin */
+  .background {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     background-image: url("/img/background/written.PNG");
     background-size: contain;
     background-position: right;
     background-repeat: no-repeat;
+  }
+  .container {
+    display: flex;
+    align-items: center; 
+    margin: 0; 
   }
   .spiegone {
     display: flex;
