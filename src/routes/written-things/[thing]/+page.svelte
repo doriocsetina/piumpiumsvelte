@@ -74,12 +74,19 @@
     margin-bottom: 100px;
     margin-left: auto; /* Pushes the element to the right */
     margin-right: 5%;
-    max-width: 800px;
+    max-width: 1400px;
     align-self: flex-end;
     background-color: white;
+    z-index: 20;
+  }
+
+  .markdown-content{
+    font-size: x-large;
+    margin: 20px;
   }
 
   h1 {
     background-color: white;
+    margin: 20px;
   }
 </style>

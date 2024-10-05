@@ -109,8 +109,8 @@
   }
 
   .gallery-container {
-    max-width: 100vh; /* Adjust height as needed */
-    max-height: 98vh; /* Full width */
+    max-width: 98vh; /* Adjust height as needed */
+    max-height: 93vh; /* Full width */
 
     overflow: hidden; /* No scrollbars for the outer container */
     position: relative; /* Positioning control */

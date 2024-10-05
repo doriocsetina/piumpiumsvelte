@@ -15,14 +15,19 @@
 
   let textData: TextData;
   let markdownContent: Promise<string>;
-
+  let chapter: number;
+  $: nextChapter = chapter + 1;
+  $: previousChapter = chapter - 1;
   onMount(async () => {
     try {
-      console.log("doing this: ", data.thing);
+      chapter = parseInt(data.chapter);
+      console.log("chapter is now: ", chapter)
       const response = await fetch("/api/texts/" + data.thing);
       if (response.ok) {
         textData = (await response.json()) as TextData;
-        const markdownResponse = await fetch(`/written/${textData.id}/${textData.chapters[data.chapter as unknown as number]}`);
+        const markdownResponse = await fetch(
+          `/written/${textData.id}/${textData.chapters[parseInt(data.chapter)]}`
+        );
         if (markdownResponse.ok) {
           const markdown = await markdownResponse.text();
           markdownContent = Promise.resolve(marked(markdown));
@@ -34,21 +39,32 @@
       console.error("Error fetching texts data:", error);
     }
   });
+
 </script>
 
 <div class="container">
-  <div class="capitolo">
-    <h1>{textData?.title}</h1>
-    {#await markdownContent}
-      <div class="markdown-content"></div>
-    {:then resolvedMarkdownContent}
-      <div class="markdown-content">{@html resolvedMarkdownContent}</div>
-    {/await}
+  <div class="container-vertical">
+    <div class="capitolo">
+      <h1>{textData?.title}</h1>
+      {#await markdownContent}
+        <div class="markdown-content"></div>
+      {:then resolvedMarkdownContent}
+        <div class="markdown-content">{@html resolvedMarkdownContent}</div>
+      {/await}
+    </div>
+    <nav>
+      {#if previousChapter !== undefined && previousChapter >= 0}
+      <a data-sveltekit-reload href="/written-things/{textData?.id}/{previousChapter}"
+      >capitolo precedente</a
+      >
+      {/if}
+      {#if nextChapter !== undefined && textData?.chapters.length > nextChapter}
+      <a data-sveltekit-reload href="/written-things/{textData?.id}/{nextChapter}"
+      >capitolo successivo</a
+      >
+      {/if}
+    </nav>
   </div>
-  <nav>
-    <a href="/written-things/{textData.id}/{(data.chapter as unknown as number) + 1}">capitolo successivo</a>
-    <a href="/written-things/{textData.id}/{(data.chapter as unknown as number) - 1}">capitolo precedente</a>
-  </nav>
 </div>
 <div class="background"></div>
 
@@ -69,19 +85,48 @@
   .container {
     display: flex;
     flex-direction: row;
+
+  }
+
+  .container-vertical {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    margin-left: auto; /* Pushes the element to the right */
+  }
+
+  .container-vertical nav {
+    display: flex;
+    width: 95%;
+    margin-right: 5%;
+    background-color: white;
+    justify-content: space-between;
+  }
+
+  .container-vertical a {
+    color: black;
+    text-decoration: none;
+    font-size: x-large;
   }
 
   .capitolo {
     margin-top: 100px;
     margin-bottom: 100px;
-    margin-left: auto; /* Pushes the element to the right */
     margin-right: 5%;
-    max-width: 800px;
-    align-self: flex-end;
+    max-width: 1400px;
     background-color: white;
+    z-index: 20;
+    transition: all 1s ease;
+
+  }
+
+  .markdown-content {
+    font-size: x-large;
+    margin: 20px;
   }
 
   h1 {
     background-color: white;
+    margin: 20px;
   }
 </style>

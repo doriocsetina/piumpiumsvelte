@@ -23,10 +23,7 @@
     justify-content: flex-start; /* Align to the left */
     align-items: center; /* Center vertically */
     margin: 0; /* Remove default margin */
-    background-image: url("/img/background/home.PNG");
-    background-size: contain;
-    background-position: right;
-    background-repeat: no-repeat;
+    height: 90vh;
   }
   .spiegone {
     display: flex;

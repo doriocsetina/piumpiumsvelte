@@ -15,11 +15,25 @@
     const handleScroll = () => {
       const homebarImageBottom =
         homebarImage.getBoundingClientRect().bottom + window.scrollY;
-        console.log()
+      const maxScrollY =
+        document.documentElement.scrollHeight - window.innerHeight;
+
       if (window.scrollY > homebarImageBottom) {
         isScrolled = true;
+        console.log("first option to: ", isScrolled);
+        console.log("scrolled: ", homebarImageBottom);
+        console.log("scrolled: ", window.scrollY);
       } else {
         isScrolled = false;
+        console.log("changing visibility to: ", isScrolled);
+        console.log("now false: ", window.scrollY);
+        console.log("now false: ", homebarImageBottom);
+      }
+
+      // Handle edge case where scroll position is at the maximum
+      if (window.scrollY >= maxScrollY) {
+        isScrolled = true;
+        console.log("Reached max scroll position: ", maxScrollY);
       }
     };
 
@@ -126,5 +140,4 @@
     bottom: 0;
     background-color: white;
   }
-
 </style>
