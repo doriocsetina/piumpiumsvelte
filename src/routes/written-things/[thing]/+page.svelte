@@ -58,7 +58,7 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background-image: url("/img/background/written.PNG");
+    background-image: url("/img/background/written.webp");
     background-size: contain;
     background-position: left;
     background-repeat: no-repeat;
@@ -74,7 +74,7 @@
     margin-bottom: 100px;
     margin-left: auto; /* Pushes the element to the right */
     margin-right: 5%;
-    max-width: 1400px;
+    max-width: 1000px;
     align-self: flex-end;
     background-color: white;
     z-index: 20;

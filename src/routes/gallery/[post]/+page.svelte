@@ -1,7 +1,8 @@
 <script lang="ts">
   import type { PageData } from "./$types";
   import { onDestroy, onMount } from "svelte";
-  import { isTitleShown } from "$lib/stores";
+  import { isTitleShown, isScrolled } from "$lib/stores";
+
   export let data: PageData;
 
   interface PostData {
@@ -11,9 +12,11 @@
     preview: string;
     files: string[];
   }
+
   let postData: PostData;
-  
+
   onMount(async () => {
+    $isScrolled = false;
     $isTitleShown = false;
     try {
       const response = await fetch("/api/images/" + data.post);
@@ -26,7 +29,7 @@
       console.error("Error fetching posts data:", error);
     }
   });
-  onDestroy( () => $isTitleShown = true)
+  onDestroy(() => ($isTitleShown = true));
   let currentIndex = 0;
 
   function scrollToImage(index: number) {
@@ -52,6 +55,10 @@
     if (currentIndex > 0) {
       scrollToImage(currentIndex - 1);
     }
+  }
+
+  function goBack() {
+    window.history.back();
   }
 </script>
 
@@ -87,7 +94,9 @@
       />
     {/if}
   </div>
+  <button class="go-back-button" on:click={goBack}>go back</button>
 </div>
+<div class="background"></div>
 
 <style>
   .container {
@@ -95,17 +104,21 @@
     align-items: center; /* Center items vertically */
     justify-content: space-between; /* Space out items horizontally */
     margin-right: 10%;
+    margin-left: 20px;
   }
+
   .title,
   .description {
-    margin: 0; /* Remove default margin */
+    margin: 10px;
     background-color: white; /* Set background color to white */
-    font-size: large;
+    font-size: xx-large;
+    align-self: flex-start;
   }
+
   .text-content {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center text vertically */
+    justify-content: center;
   }
 
   .gallery-container {
@@ -125,6 +138,7 @@
     height: 100%; /* Full height of the container */
     -webkit-overflow-scrolling: touch;
   }
+
   .gallery-image {
     flex: 0 0 auto; /* Prevent images from shrinking or growing */
     width: 100%; /* Each image takes full width */
@@ -142,12 +156,37 @@
     cursor: pointer;
     z-index: 1;
   }
+
   .nav-button.left {
     left: 0;
     z-index: 51;
   }
+
   .nav-button.right {
     right: 0;
     z-index: 51;
+  }
+
+  .go-back-button {
+    position: fixed;
+    top: 5px;
+    right: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    font-size: xx-large;
+    cursor: pointer;
+  }
+
+  .background {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: url("/img/background/gallery.webp");
+
+    background-position: left;
+    background-repeat: no-repeat;
   }
 </style>

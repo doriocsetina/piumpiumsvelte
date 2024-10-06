@@ -1,6 +1,6 @@
 <div class="container">
   <div class="spiegone">
-    <p>benvenut sul sito web di pium pium !</p>
+    <p>benvenut sul sito web di piumpium !!!!!!!</p>
   </div>
 </div>
 <div class="background"></div>
@@ -13,7 +13,7 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background-image: url("/img/background/home.PNG");
+    background-image: url("/img/background/home.webp");
     background-size: contain;
     background-position: right;
     background-repeat: no-repeat;
@@ -21,9 +21,10 @@
   .container {
     display: flex;
     justify-content: flex-start; /* Align to the left */
-    align-items: center; /* Center vertically */
-    margin: 0; /* Remove default margin */
-    height: 90vh;
+    align-items: baseline;
+    margin-top: 100px ;
+    margin-left: 20px ;
+    height: 59vh;
   }
   .spiegone {
     display: flex;
@@ -34,6 +35,6 @@
   .spiegone p {
     align-items: center;
     background-color: white;
-    font-size: large;
+    font-size: x-large;
   }
 </style>
