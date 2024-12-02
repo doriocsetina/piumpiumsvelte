@@ -101,6 +101,7 @@
     flex-direction: row;
     justify-content: space-between;
     margin-left: 20px;
+    z-index: 1;
   }
 
   .text-container {
